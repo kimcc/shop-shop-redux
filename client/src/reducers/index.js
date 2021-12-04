@@ -1,3 +1,14 @@
+// import { combineReducers } from 'redux';
+// import productReducer from './productReducer';
+
+// //import cartReducer from './productReducer';
+
+// const rootReducer = combineReducers({
+//   cart: cartReducer,
+// });
+
+// export default rootReducer;
+
 import {
   UPDATE_PRODUCTS,
   UPDATE_CATEGORIES,
@@ -8,11 +19,17 @@ import {
   UPDATE_CART_QUANTITY,
   CLEAR_CART,
   TOGGLE_CART
-} from './actions';
+} from '../utils/actions';
 
-import { useReducer } from 'react';
+export const initialState = {
+  products: [],
+  cart: [],
+  categories: [],
+  cartOpen: false,
+  currentCategory: '',
+}
 
-export const reducer = (state, action) => {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     // if action type value is the value of `UPDATE_PRODUCTS`, return a new state object with an updated products array
     case UPDATE_PRODUCTS:
@@ -85,8 +102,4 @@ export const reducer = (state, action) => {
     default:
       return state;
   }
-};
-
-export function useProductReducer(initialState) {
-  return useReducer(reducer, initialState);
 }

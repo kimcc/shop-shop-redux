@@ -1,25 +1,44 @@
 import React, { useEffect } from "react";
 import CartItem from '../CartItem';
 import Auth from '../../utils/auth';
-import { useStoreContext } from '../../utils/GlobalState';
+
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
+
 import { QUERY_CHECKOUT } from '../../utils/queries';
 import { loadStripe } from '@stripe/stripe-js';
 import { idbPromise } from "../../utils/helpers";
 import { useLazyQuery } from '@apollo/client';
 import './style.css';
 
+// import { connect, useDispatch } from 'react-redux';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
-const Cart = () => {
+// Map redux state to props
+// function mapStateToProps(state) {
+//   return {
+//     cart: state.cart,
+//     cartOpen: state.cartOpen
+//   };
+// }
 
-  const [state, dispatch] = useStoreContext();
+const Cart = () => {
+  const state = useSelector((state) => state);
+
+  const dispatch = useDispatch();
+
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   useEffect(() => {
     async function getCart() {
       const cart = await idbPromise('cart', 'get');
-      dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
+      dispatch({
+        type: ADD_MULTIPLE_TO_CART,
+        products: [...cart]
+      })
     };
   
     if (!state.cart.length) {
@@ -49,7 +68,7 @@ const Cart = () => {
         </span>
       </div>
     );
-  }
+  }  
 
   function calculateTotal() {
     let sum = 0;
@@ -103,8 +122,14 @@ const Cart = () => {
             You haven't added anything to your cart yet!
           </h3>
         )}
+        <div>
+          <h1>
+            This is a test
+          </h1>
+        </div>
     </div>
   );
 }
 
+//export default Cart;
 export default Cart;

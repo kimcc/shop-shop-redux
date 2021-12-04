@@ -11,7 +11,7 @@ import {
   TOGGLE_CART
 } from '../utils/actions';
 
-import { reducer } from '../utils/reducers';
+import { reducer } from '../reducers/index';
 
 // create a sample of what our global state will look like
 const initialState = {

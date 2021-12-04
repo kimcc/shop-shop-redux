@@ -1,12 +1,14 @@
 import React from 'react';
 
-import { useStoreContext } from '../../utils/GlobalState';
+import { connect, useDispatch } from 'react-redux';
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
 import { idbPromise } from "../../utils/helpers";
 
 const CartItem = ({ item }) => {
 
-  const [, dispatch] = useStoreContext();
+  const dispatch = useDispatch();
+
+  //const [, dispatch] = useStoreContext();
 
   const removeFromCart = item => {
     dispatch({
@@ -65,5 +67,13 @@ const CartItem = ({ item }) => {
     </div>
   );
 }
+
+// Map redux state to props
+// function mapStateToProps(state) {
+//   return {
+//     cart: state.cart,
+//     cartOpen: state.cartOpen
+//   };
+// }
 
 export default CartItem;
