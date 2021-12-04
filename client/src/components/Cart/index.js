@@ -122,11 +122,6 @@ const Cart = () => {
             You haven't added anything to your cart yet!
           </h3>
         )}
-        <div>
-          <h1>
-            This is a test
-          </h1>
-        </div>
     </div>
   );
 }
