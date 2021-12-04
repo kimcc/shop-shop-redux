@@ -10,20 +10,10 @@ import { idbPromise } from "../../utils/helpers";
 import { useLazyQuery } from '@apollo/client';
 import './style.css';
 
-// import { connect, useDispatch } from 'react-redux';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
-
-// Map redux state to props
-// function mapStateToProps(state) {
-//   return {
-//     cart: state.cart,
-//     cartOpen: state.cartOpen
-//   };
-// }
 
 const Cart = () => {
   const state = useSelector((state) => state);
@@ -102,7 +92,7 @@ const Cart = () => {
             <CartItem key={item._id} item={item} />
           ))}
           <div className="flex-row space-between">
-            <strong>Total: $0</strong>
+            <strong>Total: ${calculateTotal()}</strong>
             {
               Auth.loggedIn() ?
                 <button onClick={submitCheckout}>
@@ -126,5 +116,4 @@ const Cart = () => {
   );
 }
 
-//export default Cart;
 export default Cart;

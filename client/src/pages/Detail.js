@@ -5,7 +5,6 @@ import { useQuery } from '@apollo/client';
 import { QUERY_PRODUCTS } from '../utils/queries';
 import spinner from '../assets/spinner.gif';
 
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import { idbPromise } from "../utils/helpers";
